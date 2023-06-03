@@ -9,7 +9,7 @@
             <?php unset($_SESSION["msg"]); ?>
         <?php endif; ?>
 
-        <form action="login" method="POST">
+        <form class="px-2" action="login" method="POST">
             <div class="form-floating mb-4">
                 <input type="text" name="username" class="form-control bg-dark text-white" id="username" placeholder="username" autofocus required>
                 <label for="username">Username</label>
