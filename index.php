@@ -7,26 +7,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/style.css">
+
     <title>MVC Teszt</title>
 </head>
 
 <body>
-    <div>
-        <a href="/">Home</a>
-        <?php if (!isset($_SESSION["user"])) : ?>
-            <a href="login">Sign In</a>
-            <a href="register">Sign Up</a>
-        <?php else : ?>
-            <a href="profile">Profile</a>
-            <?php if ($_SESSION["user"]["isAdmin"]) : ?>
-                <a href="users">Users</a>
-            <?php endif; ?>
-            <a href="logout">Logout</a>
+    <header class="container-fluid">
+        <div class="row justify-content-center align-items-center g-2">
+            <div class="col-sm-12 col-md-6">
+                <h1 class="text-center">InfoTicket</h1>
+                <hr>
+            </div>
+        </div>
+        <?php if (isset($_SESSION["user"])) : ?>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
+                <a class="navbar-brand" href="/">Hibabejelentő</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php if ($_SESSION["user"]["isAdmin"]) : ?>
+                                <a class="nav-link" href="users">Users</a>
+                            <?php endif; ?>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         <?php endif; ?>
+    </header>
 
-    </div>
+    <main>
+        <?php include "src/app.php" ?>
+    </main>
 
-    <?php include "src/app.php" ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="public/js/script.js"></script>
 </body>
 
 </html>

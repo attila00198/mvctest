@@ -18,16 +18,17 @@ class UsersModel
         if ($stmt) {
             $stmt->execute(
                 [
-                    ":name" => $user->name,
-                    ":fullname" => $user->fullname,
-                    ":email" => $user->email,
-                    ":passwd" => $user->passwd,
+                    ":name" => $user["name"],
+                    ":fullname" => $user["fullname"],
+                    ":email" => $user["email"],
+                    ":passwd" => $user["passwd"],
                 ]
             );
 
             if ($stmt->rowCount() > 0) {
                 $_SESSION["msg"] = [
                     "category" => "success",
+                    "heading" => "Info",
                     "message" => "Felhasználó sikeresen létrehozva."
                 ];
             } else {
@@ -39,6 +40,7 @@ class UsersModel
         } else {
             $_SESSION["msg"] = [
                 "category" => "danger",
+                "heading" => "Warning",
                 "message" => "Hiba történt a felhasználó létrehozása során."
             ];
         }

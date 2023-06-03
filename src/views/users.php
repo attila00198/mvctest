@@ -2,7 +2,6 @@
 
 <?php if (count($users) == 0) : ?>
     <p><?php echo "There is no users to show" ?></p>
-    <?php print_r($users) ?>
 <?php endif; ?>
 <table border="1">
     <thead>

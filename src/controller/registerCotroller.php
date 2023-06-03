@@ -14,6 +14,7 @@ class RegisterCotroller {
         if (strlen($passwd) < 8) {
             $_SESSION["msg"] = [
                 "category" => "danger",
+                "heading" => "Warning",
                 "message" => "A jelszónak legalább 8 karakter hosszúnak kell lennie."
             ];
             return false;
@@ -27,6 +28,7 @@ class RegisterCotroller {
         if ($this->usersModel->nameExists($name)) {
             $_SESSION["msg"] = [
                 "category" => "danger",
+                "heading" => "Warning",
                 "message" => "A megadott felhasználó név már foglalt."
             ];
             return false;
@@ -34,6 +36,7 @@ class RegisterCotroller {
         if ($this->usersModel->emailExists($email)) {
             $_SESSION["msg"] = [
                 "category" => "danger",
+                "heading" => "Warning",
                 "message" => "A megadott Email cím már foglalt."
             ];
             return false;

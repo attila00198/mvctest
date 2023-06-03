@@ -13,7 +13,8 @@ class LoginController {
         if(!$this->usersModel->nameExists($username)) {
             $_SESSION["msg"] = [
                 "category" => "danger",
-                "message" => "No user fond with this name" . $username
+                "heading" => "Warning",
+                "message" => "Invalid username: " . $username
             ];
             return false;
         }
@@ -22,6 +23,7 @@ class LoginController {
         if(!password_verify($password ,$user["passwd"])) {
             $_SESSION["msg"] = [
                 "category" => "danger",
+                "heading" => "Warning",
                 "message" => "Invalid Password"
             ];
             return false;

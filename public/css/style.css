@@ -1,0 +1,16 @@
+html, body {
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: monospace;
+    background-color: rgb(43, 43, 43);
+    color: rgb(134, 223, 0);
+}
+
+form input {
+    background-color: black;
+}
+
+.copyright {
+    width: max-content;
+    padding: 10px;
+}

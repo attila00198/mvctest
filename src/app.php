@@ -10,24 +10,40 @@ $method = $_SERVER["REQUEST_METHOD"];
 
 switch ($uri[1]) {
     case '':
+        if (!isset($_SESSION["user"])) {
+            header("location: login", 302);
+            break;
+        }
         include 'views/home.php';
         break;
 
     case 'register':
-        if ($method == "POST") {
-            if ($_POST["password"] != $_POST["password_repeat"]) {
-                echo "The 2 passwords are not the same";
-                return false;
-            }
-            $name = $_POST["name"];
-            $fullname = $_POST["fullname"];
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-
-            $registerController = new RegisterCotroller();
-            $registerController->createUser($name, $fullname, $email, $password);
-        }
         include 'views/register.php';
+        if (!isset($_SESSION["user"])) {
+            if ($method == "POST") {
+                if ($_POST["passoword"] != $_POST["password_repeat"]) {
+                    $_SESSION["msg"] = [
+                        "category" => "danger",
+                        "heading" => "Error",
+                        "message" => "A Megadott jelszavak nem egyeznk."
+                    ];
+                    header("location: register", 302);
+                    break;
+                }
+                
+                $name = $_POST["username"];
+                $fullname = $_POST["fullname"];
+                $email = $_POST["email"];
+                $password = $_POST["password"];
+
+                $registerController = new RegisterCotroller();
+                $registerController->createUser($name, $fullname, $email, $password);
+
+                header("location: register");
+                break;
+            }
+            break;
+        }
         break;
 
     case 'login':
@@ -63,7 +79,7 @@ switch ($uri[1]) {
             break;
         }
 
-        if($_SESSION["user"]["isAdmin"]) {
+        if ($_SESSION["user"]["isAdmin"]) {
             $usersController = new UsersController();
             $users = $usersController->getUsers();
             include 'views/users.php';
